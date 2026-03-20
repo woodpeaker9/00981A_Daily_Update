@@ -84,8 +84,10 @@ def run_update():
     report = merged.sort_values(['sort', '張數變動'], ascending=[True, False]).drop(columns=['sort'])
 
     # 5. 產出 README 內容
+    tz_taiwan = timezone(timedelta(hours=8))  # 定義台北時區 (UTC+8)
+    now_taiwan = datetime.now(tz_taiwan)
     summary = f"# 00981A 每日持股變動監測\n\n"
-    summary += f"> **更新時間**：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} (台北時間)\n"
+    summary += f"> **更新時間**：{now_taiwan.strftime('%Y-%m-%d %H:%M:%S')} (台北時間)\n"
     summary += f"> **比對區間**：{all_files[1][6:14]} ➔ {all_files[0][6:14]}\n\n"
     summary += "### 📊 持股變動明細 (單位：張)\n\n"
     summary += report[['股票代號', '股票名稱', '張數_昨', '張數_今', '張數變動', '增減幅(%)', '狀態']].to_markdown(index=False)

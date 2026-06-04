@@ -1,8 +1,6 @@
 name: 00981A Daily Update
 
 on:
-  schedule:
-    - cron: '37 8 * * 1-5' # 台灣時間 16:37
   workflow_dispatch: # 允許手動點擊執行測試
 
 jobs:
